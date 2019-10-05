@@ -43,6 +43,7 @@ class Redx{
         this.distribute=this.distribute
         this.commit=this.commit
         this.dispatch=this.dispatch
+        this.subscribe=this.subscribe
               //创建store
         this.store=createStore(
             this.reducerCretor({
@@ -153,6 +154,7 @@ class Redx{
             }
         }
 
+
         return this.store.dispatch(distributeDadta)
     }
 
@@ -172,7 +174,7 @@ class Redx{
     }
     //订阅
     subscribe(){
-        return   this.store.subscribe.apply(arguments)
+        return   this.store.subscribe.apply(this,arguments)
     }
 }
 

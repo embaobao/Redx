@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "lodash": "^4.17.15",
+    "react-redux": "^7.1.1",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0"
   },

@@ -7,7 +7,6 @@ var store=new Redx({
     ,
     mutations:{
         setCount(state,{payload}) {
-            // console.log(payload);
             return  {
                 count:state.count+payload
             }
@@ -26,9 +25,9 @@ var store=new Redx({
 })
 
 // Method 1
-store.commit('setCount',{
-    payload:3
-})
+// store.commit('setCount',{
+//     payload:3
+// })
 
 // Method 2
 // store.commit('setCount',4)
@@ -40,12 +39,20 @@ store.commit('setCount',{
 //     payload:6
 // })
 
-store.dispatch('asyncAddCount',
-100
-)
-store.commit('setCount',{
-    payload:3
-})
+// store.dispatch('asyncAddCount',
+//     100
+// )
+// store.commit('setCount',{
+//     payload:3
+// })
+
+// store.subscribe (function () {
+//     console.log(1);
+//    let  currentValue = store.getState()
+//   console.log(currentValue);
+// })()
 
 
 
+
+export default store
