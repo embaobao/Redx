@@ -1,30 +1,25 @@
 import React, { Component,createContext } from 'react'
-import { Consumer, Provider,mapState } from './store/react-redx'
-import store from './store/test';
+import { mapStore, hasRedx, mapActions, mapState,mapMutations } from './store/react-redx';
+
+
 
 class Redx  extends Component {
-    state={
 
-    }
+    state={}
     render() {
+
+        mapStore()
         return (
-            
                 <div>
-                    <p>哈哈 </p>
-                    {/* <Consumer>
-                    {soter => (
-                        <p>Redx{store.getState().count} </p>
-                    )}
-                    </Consumer> */}
-                    {
-                        this.props.count
-                    }
+                    <p>proxy {this.props.stateData.count} </p>
                 </div>
-       
         )
     }
     componentDidMount(){
-        console.log(this.props);
+        this.props.setCount(12)
+        // console.log(this.props);
+        //console.log(this.props.stateData.count);
+        //this.props.asyncAddCount(100)
     }
 
     static getDerivedStateFromProps(nextProps, prevState) {
@@ -37,4 +32,16 @@ class Redx  extends Component {
 
 
 
-export default mapState(Redx) 
+Redx= mapStore ((s,m,a) => {
+    return{
+      state:  s,
+      mutations: m,
+      actions: a}
+})(Redx)
+
+Redx=mapActions(['asyncAddCount'])(Redx)
+Redx=mapState(['count'])(Redx)
+Redx=mapMutations(['setCount'])(Redx)
+
+export default   Redx
+

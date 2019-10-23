@@ -1,19 +1,18 @@
 import React, { useEffect, useState ,createContext} from 'react';
 
-import { Provider } from './store/react-redx';
 import logo from './logo.svg';
 import './App.css';
-import store from './store/test'
+
+import { hasRedx } from './store/react-redx';
+
+import Test from './Test';
 import Redx from './Redx';
+import store from './store/test';
 
 
  
-
-
-
 function App() {
   const [count ,setCount]=useState(store.getState().count) 
-
   useEffect (() => {  
     store.subscribe(() => {
       setCount(store.getState().count)
@@ -21,16 +20,14 @@ function App() {
 
   },[])
   return (
-    <Provider value={store}>
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>{count} </p>
         <p>redx ----</p>
         <Redx></Redx>
+        <Test></Test>
         <a
-          className="App-link"
-          rel="noopener noreferrer"
           onClick={()=>{
             store.dispatch('asyncAddCount',100 )
           }}
@@ -39,8 +36,7 @@ function App() {
         </a>
       </header>
     </div>
-    </Provider>
   );
 }
 
-export default App;
+export default hasRedx(App) 

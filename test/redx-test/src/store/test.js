@@ -2,7 +2,7 @@ import Redx  from './index.js'
 
 var store=new Redx({
     state:{
-        count:0
+        count:1
     }
     ,
     mutations:{
