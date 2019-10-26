@@ -14,7 +14,6 @@ var store=new Redx({
     },
     actions:{
         asyncAddCount(that,{payload}) {
-            //   console.log(that);
            setTimeout(
                () => {
                that. commit('setCount',payload)

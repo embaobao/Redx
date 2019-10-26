@@ -1,5 +1,5 @@
 
-import React, { createContext } from 'react'
+import React from 'react'
 import {Provider} from 'react-redux';
 import store from '../store/test'
 
@@ -19,19 +19,17 @@ const mapStore=(mapFn) => {
 
 const mapActions=(actionArray)=>{
 
-  // console.log(actionArray);
    let propsAction={}
    actionArray.map((actionName) => {
       propsAction[actionName]=function(){
         store.dispatch.apply(store,[actionName,...arguments])
       }
    })
-  //  console.log(propsAction);
+
    return (Comp) => ((props) => ( <Comp {...props} {...propsAction} ></Comp>))
 }
 
 const mapState=(stateArray)=>{
-// console.log(actionArray);
    let data={}
    stateArray.map((stateName) => {
      data[stateName]=store.getState()[stateName]
@@ -39,14 +37,10 @@ const mapState=(stateArray)=>{
 
    data= new Proxy(data,{
         get :function (arget, propKey, receiver){
-          // console.log(arget);
-          // console.log(propKey);
           return  store.getState()[propKey]
         }
      })
 
-      // console.log(data);
-  //  console.log(propsAction);
    return (Comp) => ((props) => ( <Comp {...props} stateData={data} ></Comp>))
 }
 
@@ -60,6 +54,9 @@ const mapMutations=(mutationsArray)=>{
    })
    return (Comp) => ((props) => ( <Comp {...props} {...propsMutations} ></Comp>))
 }
+
+
+
 
 export {
     hasRedx,
